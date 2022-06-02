@@ -3,5 +3,6 @@ public class Hello {
         System.out.println("Hello World!");
         System.out.println("Hello again!");
         System.out.println("commit");
+        System.out.println("commit through terminal");
     }
 }
