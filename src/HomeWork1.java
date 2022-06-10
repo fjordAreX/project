@@ -1,8 +1,4 @@
 import java.util.Arrays;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class HomeWork1 {
     public static void main(String[] args) {
         // Level 1
@@ -112,7 +108,7 @@ public class HomeWork1 {
             for (int i = 0; i< arrOfInfo.length ; i++) {
                 try {
                     if (arrOfInfo[i].contains("@")) arrOfInfo[i] = maskEmail(arrOfInfo[i]);
-                    else if (isDigit(arrOfInfo[i])) arrOfInfo[i] = maskNumber(arrOfInfo[i]);
+                    else if (arrOfInfo[i].contains("7")) arrOfInfo[i] = maskNumber(arrOfInfo[i]);
                     else arrOfInfo[i] = maskName(arrOfInfo[i]);
                 } catch (IllegalStateException ignored){}
             }
@@ -127,27 +123,20 @@ public class HomeWork1 {
         info = info.replace("<data>","");
         return info;
     }
-    private static String maskEmail(String text){
-        String maskedEmail;
-        Pattern emailPattern = Pattern.compile("[\\w.-]+@(\\w+)\\.(com|ru)");
-        Matcher matcher = emailPattern.matcher(text);
-        String email = "";
-
-       if(matcher.find()) {
-           email = matcher.group();
-        }
-        String emailsSite = email.substring(email.lastIndexOf("@"),email.lastIndexOf("."));
+    private static String maskEmail(String mail){
+        String emailsSite = mail.substring(mail.lastIndexOf("@"),mail.lastIndexOf("."));
         String maskedEmailsSite = "*".repeat(emailsSite.length()-1);
 
-        maskedEmail = email.replaceAll("\\w@\\w+", "*@"+maskedEmailsSite);
-        return maskedEmail;
+        return mail.replaceAll("\\w@\\w+", "*@"+maskedEmailsSite);
 
     }
     private static String maskNumber(String text){
         StringBuilder maskedNum = new StringBuilder(text);
+
         maskedNum.setCharAt(4, '*');
         maskedNum.setCharAt(5, '*');
         maskedNum.setCharAt(6, '*');
+
         return maskedNum.toString();
     }
 
@@ -161,13 +150,6 @@ public class HomeWork1 {
         return String.join(" ",arr);
     }
 
-    private static boolean isDigit(String s) throws NumberFormatException {
-        try {
-            Long.parseLong(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
-}
+
 
