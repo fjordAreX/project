@@ -98,7 +98,7 @@ public class HomeWork1 {
                                                 //Level 3
         System.out.println("\n\t\t\tLevel 3:\n");
 
-        String before = "<client>(Какие то данные)<data>79991113344;test@yandex.ru;Иванов Иван Иванович</data></client>";
+        String before = "<client>(Какие то данные)<data>79999999999</data></client>";
         String after = masking(before);
         System.out.println(after);
     }
@@ -129,7 +129,7 @@ public class HomeWork1 {
     }
     private static String maskEmail(String text){
         String maskedEmail;
-        Pattern emailPattern = Pattern.compile("(\\w+)@(\\w+)\\.(com|ru)");
+        Pattern emailPattern = Pattern.compile("[\\w.-]+@(\\w+)\\.(com|ru)");
         Matcher matcher = emailPattern.matcher(text);
         String email = "";
 
@@ -144,7 +144,11 @@ public class HomeWork1 {
 
     }
     private static String maskNumber(String text){
-        return text.replaceAll(text.substring(4,7),"***");
+        StringBuilder maskedNum = new StringBuilder(text);
+        maskedNum.setCharAt(4, '*');
+        maskedNum.setCharAt(5, '*');
+        maskedNum.setCharAt(6, '*');
+        return maskedNum.toString();
     }
 
     private static String maskName(String text){
