@@ -29,7 +29,7 @@ public class HomeWork1 {
         double weight = 73.6;
         double bmi = weight / (height * height); //Math.pow(height,2)
         System.out.println(bmi);
-        double bmiRounded = Double.parseDouble(String.format(Locale.ENGLISH, "%.1f", bmi));
+        double bmiRounded = Double.parseDouble(String.format("%.1f", bmi).replace(",","."));
         System.out.println(bmiRounded);
 
         // Exercise 3
