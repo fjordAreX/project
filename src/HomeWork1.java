@@ -95,11 +95,10 @@ public class HomeWork1 {
 
 
 
-
                                                 //Level 3
         System.out.println("\n\t\t\tLevel 3:\n");
 
-        String before = "<client>(Какие то данные)<data>79991113344;test@yandex.ru;Иванов Иван Иванович</data></client>";
+        String before = "<client>(РљР°РєРёРµ С‚Рѕ РґР°РЅРЅС‹Рµ)<data>79991113344;test@yandex.ru;РРІР°РЅРѕРІ РРІР°РЅ РРІР°РЅРѕРІРёС‡</data></client>";
         String after = masking(before);
         System.out.println(after);
     }
@@ -115,8 +114,7 @@ public class HomeWork1 {
                     if (arrOfInfo[i].contains("@")) arrOfInfo[i] = maskEmail(arrOfInfo[i]);
                     else if (isDigit(arrOfInfo[i])) arrOfInfo[i] = maskNumber(arrOfInfo[i]);
                     else arrOfInfo[i] = maskName(arrOfInfo[i]);
-                } catch (IllegalStateException ignored){
-                }
+                } catch (IllegalStateException ignored){}
             }
             answer = String.join(";",arrOfInfo);
         }
@@ -129,21 +127,19 @@ public class HomeWork1 {
         info = info.replace("<data>","");
         return info;
     }
-
     private static String maskEmail(String text){
-
         String maskedEmail;
         Pattern emailPattern = Pattern.compile("(\\w+)@(\\w+)\\.(com|ru)");
         Matcher matcher = emailPattern.matcher(text);
         String email = "";
 
-        while (matcher.find()) {
-            email = matcher.group();
+       if(matcher.find()) {
+           email = matcher.group();
         }
         String emailsSite = email.substring(email.lastIndexOf("@"),email.lastIndexOf("."));
-        String emaskedMailsSite = "*".repeat(emailsSite.length()-1);
+        String maskedEmailsSite = "*".repeat(emailsSite.length()-1);
 
-        maskedEmail = email.replaceAll("\\w@\\w+", "*@"+emaskedMailsSite);
+        maskedEmail = email.replaceAll("\\w@\\w+", "*@"+maskedEmailsSite);
         return maskedEmail;
 
     }
