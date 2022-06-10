@@ -98,7 +98,7 @@ public class HomeWork1 {
                                                 //Level 3
         System.out.println("\n\t\t\tLevel 3:\n");
 
-        String before = "<client>(Какие то данные)<data>79999999999</data></client>";
+        String before = "<client>(Какие то данные)<data>79999999999;Иванов Иван;test.A-_3242@gmail.com</data></client>";
         String after = masking(before);
         System.out.println(after);
     }
