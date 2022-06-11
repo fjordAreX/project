@@ -132,7 +132,7 @@ public class HomeWork1 {
         return info;
     }
     private static String maskEmail(String mail){
-        String emailsSite = mail.substring(mail.lastIndexOf("@"),mail.lastIndexOf("."));
+        String emailsSite = mail.substring(mail.indexOf("@"),mail.indexOf(".",mail.indexOf("@")));
         String maskedEmailsSite = "*".repeat(emailsSite.length()-1);
 
         return mail.replaceAll("\\w@\\w+", "*@"+maskedEmailsSite);
