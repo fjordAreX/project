@@ -126,7 +126,7 @@ public class HomeWork1 {
     }
     private static String infoSpace(String text){
         int openingInfo = text.indexOf("<data>");
-        int closingInfo = text.lastIndexOf("</data>");
+        int closingInfo = text.indexOf("</data>",openingInfo);
         String info = text.substring(openingInfo, closingInfo);
         info = info.replace("<data>","");
         return info;
