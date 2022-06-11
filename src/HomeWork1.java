@@ -66,13 +66,15 @@ public class HomeWork1 {
         int[] intArr2 = {2, 3, 2, 17, 15};
         int[] answer = new int[intArr1.length * 3];
 
-        System.arraycopy(intArr1, 0, answer, 0, intArr1.length);
-
-        for (int i = intArr1.length, c = 0; i < intArr1.length * 2; c++, i++)
+        for (int i = 0; i < intArr1.length ; i++) {
+            answer[i]=intArr1[i];
+        }
+        for (int i = intArr1.length, c = 0; i < intArr1.length * 2; c++, i++) {
             answer[i] = intArr2[c];
-
-        for (int i = intArr1.length * 2, c = 0; i < answer.length; i++, c++)
+        }
+        for (int i = intArr1.length * 2, c = 0; i < answer.length; i++, c++) {
             answer[i] = intArr1[c] * intArr2[c];
+        }
 
         System.out.println(Arrays.toString(answer));
 
@@ -102,15 +104,21 @@ public class HomeWork1 {
     public static String masking(String text){
         String info = infoSpace(text);
         String answer;
-        if (info.isEmpty()) return text;
+        if (info.isEmpty()) {
+            return text;
+        }
         else {
             String[] arrOfInfo = info.split(";");
             for (int i = 0; i< arrOfInfo.length ; i++) {
-                try {
-                    if (arrOfInfo[i].contains("@")) arrOfInfo[i] = maskEmail(arrOfInfo[i]);
-                    else if (arrOfInfo[i].contains("7")) arrOfInfo[i] = maskNumber(arrOfInfo[i]);
-                    else arrOfInfo[i] = maskName(arrOfInfo[i]);
-                } catch (IllegalStateException ignored){}
+                if (arrOfInfo[i].contains("@")) {
+                    arrOfInfo[i] = maskEmail(arrOfInfo[i]);
+                }
+                else if (arrOfInfo[i].contains("7")) {
+                    arrOfInfo[i] = maskNumber(arrOfInfo[i]);
+                }
+                else {
+                    arrOfInfo[i] = maskName(arrOfInfo[i]);
+                }
             }
             answer = String.join(";",arrOfInfo);
         }
@@ -144,9 +152,11 @@ public class HomeWork1 {
         String [] arr = text.split(" ");
 
         String surnamesMaskedLetters = "*".repeat(arr[0].length()-2);
-        arr[0] = arr[0].replaceAll(arr[0].substring(1,arr[0].length()-1),surnamesMaskedLetters);
+        arr[0] = arr[0].replace(arr[0].substring(1,arr[0].length()-1),surnamesMaskedLetters);
 
-        if (arr.length ==3) arr[2] = arr[2].replaceAll(arr[2].substring(1),".");
+        if (arr.length ==3) {
+            arr[2] = arr[2].replace(arr[2].substring(1),".");
+        }
         return String.join(" ",arr);
     }
 
