@@ -75,7 +75,7 @@ public class Advanced {
 
         System.out.println("\nЗадание 4");
 
-        Warehouse warehouse = new Warehouse("Метро Бульвар Рокоссовского",1000);
+        Warehouse warehouse = new Warehouse("Метро Бульвар Рокоссовского",1);
 
         Worker worker1 = new Worker("Ivan");
         Worker worker2 = new Worker("Ilya");
@@ -84,7 +84,8 @@ public class Advanced {
         worker1.damageProduct(warehouse);
         System.out.println("Количество оставшейся водки на складе: "+warehouse.getQuantity());
         System.out.println("Количество испорченной продукции первым работником: "+worker1.getAmountOfDamagedProduct());
-
+        System.out.println("\nПри попытке испортить водку, когда на складе ее уже нет, будет выведено ");
+        worker1.damageProduct(warehouse);
     }
 }
 
@@ -111,7 +112,11 @@ class Warehouse{
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        if (this.quantity==0){
+            System.out.println("Водки больше не осталось.");
+        } else {
+            this.quantity = quantity;
+        }
     }
 
 
@@ -139,10 +144,15 @@ class Worker{
         this.amountOfDamagedProduct = amountOfDamagedProduct;
     }
 
-    public void damageProduct(Warehouse warehouse){
-        setAmountOfDamagedProduct(getAmountOfDamagedProduct()+1);
-        warehouse.setQuantity(warehouse.getQuantity()-1);
-        System.out.println("Ура я испортил водку!");
+    public void damageProduct(Warehouse warehouse) {
+
+        if (warehouse.getQuantity() == 0) {
+            System.out.println("Водки больше не осталось.");
+        } else {
+            warehouse.setQuantity(warehouse.getQuantity() - 1);
+            setAmountOfDamagedProduct(getAmountOfDamagedProduct() + 1);
+            System.out.println("Ура я испортил водку!");
+        }
     }
 
 }
