@@ -77,7 +77,7 @@ public class Advanced {
 
         Warehouse warehouse = new Warehouse("Метро Бульвар Рокоссовского",1);
 
-        Worker worker1 = new Worker("Ivan");
+        Worker worker1 = new Worker("Gena");
         Worker worker2 = new Worker("Ilya");
         Worker worker3 = new Worker("Kamil");
 
