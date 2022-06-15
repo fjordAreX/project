@@ -67,7 +67,6 @@ public class ExpertMain {
                         .sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).limit(1)
                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-
                 popularIncomingRegions.put(entry.getKey(), biggestInput);
             }
         }
