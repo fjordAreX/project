@@ -65,7 +65,7 @@ public class ExpertMain {
                         fromWhereAndHowMany.put(matcher.group(3), count);
 
                         // Проверяем специальные ли номера у номера из массива
-                        if (matcher.group(1).equals("М") && matcher.group(2).equals("АВ")) {
+                        if (matcher.group(0).matches("М\\d{3}АВ(\\d+)")) {
                             specialCars += 1;
                         }
                     }
