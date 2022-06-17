@@ -77,17 +77,17 @@ public class ExpertMain {
         }
 
         // вывод
-        for (Map.Entry<Integer, Integer> entryTop5 : top5.entrySet()) {
+        for (Map.Entry<Integer, Integer> Top5Regions : top5.entrySet()) {
 
-            for (Map.Entry<Integer, Map<String, Integer>> entryIncoming : popularIncomingRegions.entrySet()) {
+            for (Map.Entry<Integer, Map<String, Integer>> incomingToTop5 : popularIncomingRegions.entrySet()) {
 
-                if (entryTop5.getKey().equals(entryIncoming.getKey())) {
+                if (Top5Regions.getKey().equals(incomingToTop5.getKey())) {
 
-                for (Map.Entry<String, Integer> entry1 : entryIncoming.getValue().entrySet()) {
+                for (Map.Entry<String, Integer> theBiggestInputToEachOfTop5 : incomingToTop5.getValue().entrySet()) {
 
-                        System.out.println("В регион " + entryTop5.getKey() +
-                                " больше всего въехало машин с номерами " + entry1.getKey()
-                                + " в количестве " + entry1.getValue() + " машин");
+                        System.out.println("В регион " + Top5Regions.getKey() +
+                                " больше всего въехало машин с номерами " + theBiggestInputToEachOfTop5.getKey()
+                                + " в количестве " + theBiggestInputToEachOfTop5.getValue() + " машин");
                     }
                 }
             }
