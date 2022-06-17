@@ -63,7 +63,6 @@ public class ExpertMain {
                         // специальные номера
                         if (matcher.group(1).equals("М") && matcher.group(2).equals("АВ")) {
                             specialCars += 1;
-                            System.out.println(specialCars);
                         }
                     }
                 }
@@ -78,15 +77,15 @@ public class ExpertMain {
         }
 
         // вывод
-        for (Map.Entry<Integer, Integer> entry0 : top5.entrySet()) {
+        for (Map.Entry<Integer, Integer> entryTop5 : top5.entrySet()) {
 
-            for (Map.Entry<Integer, Map<String, Integer>> entry : popularIncomingRegions.entrySet()) {
+            for (Map.Entry<Integer, Map<String, Integer>> entryIncoming : popularIncomingRegions.entrySet()) {
 
-                if (entry0.getKey().equals(entry.getKey())) {
+                if (entryTop5.getKey().equals(entryIncoming.getKey())) {
 
-                for (Map.Entry<String, Integer> entry1 : entry.getValue().entrySet()) {
+                for (Map.Entry<String, Integer> entry1 : entryIncoming.getValue().entrySet()) {
 
-                        System.out.println("В регион " + entry0.getKey() +
+                        System.out.println("В регион " + entryTop5.getKey() +
                                 " больше всего въехало машин с номерами " + entry1.getKey()
                                 + " в количестве " + entry1.getValue() + " машин");
                     }
