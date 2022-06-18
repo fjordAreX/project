@@ -18,7 +18,9 @@ public class ExpertMain {
             Map<String, String[]> traffic = entry.getValue();
 
             for (Map.Entry<String, String[]> entryTrafficData : traffic.entrySet()) {
-
+                if (entryTrafficData.getValue().length == 0){
+                    continue;
+                }
                 if (entryTrafficData.getKey().equals("input")) {
                     // Регион и массив всех въехавших номеров
                     allInputTrafficData.put(entry.getKey(), entryTrafficData.getValue());
@@ -33,13 +35,11 @@ public class ExpertMain {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new));
 
         // Определяем из каких регионов въезжали чаще всего в топ-5
-        Map<Integer, Map<String, Integer>> popularIncomingRegions = new HashMap<>();
-        // Специальные номера (М---АВ)
-        int specialCars = 0;
+        Map<Integer, Map<String, Integer>> popularIncomingRegions = new LinkedHashMap<>();
 
         for (Map.Entry<Integer, String[]> entry : allInputTrafficData.entrySet()) {
 
-            Map<String, Integer> fromWhereAndHowMany = new HashMap<>();
+            Map<String, Integer> fromWhereAndHowMany = new LinkedHashMap<>();
             int count;
 
             // Если регион есть в ТОП-5
@@ -49,14 +49,12 @@ public class ExpertMain {
                 // Проходимся по массиву, определяя регион
                 for (String numberPlate : entry.getValue()) {
                     count = 0;
-                    specialCars = 0;
                     Matcher matcher = region.matcher(numberPlate);
 
                     if (matcher.find()) {
 
                         // Находим все номера в массиве, с таким регионом
                         for (String numberPlate2 : entry.getValue()) {
-
                             if (numberPlate2.matches("(\\p{L})\\d{3}(\\p{L}{2})" + matcher.group(3))) {
                                 count += 1;
                             }
@@ -64,10 +62,6 @@ public class ExpertMain {
                         // Добавляем в Map регион и количество машин из этого региона
                         fromWhereAndHowMany.put(matcher.group(3), count);
 
-                        // Проверяем специальные ли номера у номера из массива
-                        if (matcher.group(0).matches("М\\d{3}АВ(\\d+)")) {
-                            specialCars += 1;
-                        }
                     }
                 }
 
@@ -102,6 +96,23 @@ public class ExpertMain {
             }
         }
 
-        System.out.println("Cпециальные машины пересекли границы регионов " + specialCars + " раз");
+        // Специальные номера (М---АВ)
+        List<String> arrayOfSpecialNumbers = new ArrayList<>();
+        Pattern plate = Pattern.compile("М\\d{3}АВ(\\d+)");
+
+        for (Map.Entry<Integer, String[]> entry : allInputTrafficData.entrySet()) {
+
+            for (String numberPlate : entry.getValue()) {
+                Matcher matcher = plate.matcher(numberPlate);
+
+                if (matcher.find()) {
+                    arrayOfSpecialNumbers.add(matcher.group());
+                }
+            }
+        }
+
+        System.out.println(arrayOfSpecialNumbers);
+
+        System.out.println("Cпециальные машины пересекли границы регионов " + arrayOfSpecialNumbers.size() + " раз");
     }
 }
