@@ -98,19 +98,21 @@ public class ExpertMain {
 
         // Специальные номера (М---АВ)
         List<String> arrayOfSpecialNumbers = new ArrayList<>();
-        Pattern plate = Pattern.compile("М\\d{3}АВ(\\d+)");
+        Pattern plate = Pattern.compile("М\\d{3}АВ\\d+");
 
-        for (Map.Entry<Integer, String[]> entry : allInputTrafficData.entrySet()) {
+        for(Map.Entry<Integer, Map<String, String[]>> entryAll: allData.entrySet()) {
 
-            for (String numberPlate : entry.getValue()) {
-                Matcher matcher = plate.matcher(numberPlate);
+            for (Map.Entry<String, String[]> entry : entryAll.getValue().entrySet()) {
 
-                if (matcher.find()) {
-                    arrayOfSpecialNumbers.add(matcher.group());
+                for (String numberPlate : entry.getValue()) {
+                    Matcher matcher = plate.matcher(numberPlate);
+
+                    if (matcher.find()) {
+                        arrayOfSpecialNumbers.add(matcher.group());
+                    }
                 }
             }
         }
-
         System.out.println(arrayOfSpecialNumbers);
 
         System.out.println("Cпециальные машины пересекли границы регионов " + arrayOfSpecialNumbers.size() + " раз");
