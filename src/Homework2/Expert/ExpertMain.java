@@ -97,7 +97,7 @@ public class ExpertMain {
         }
 
         // Специальные номера (М---АВ)
-        List<String> arrayOfSpecialNumbers = new ArrayList<>();
+        HashSet<String> arrayOfSpecialNumbers = new HashSet<>();
         Pattern plate = Pattern.compile("М\\d{3}АВ\\d+");
 
         for(Map.Entry<Integer, Map<String, String[]>> entryAll: allData.entrySet()) {
