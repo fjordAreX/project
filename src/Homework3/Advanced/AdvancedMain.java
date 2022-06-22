@@ -70,7 +70,5 @@ public class AdvancedMain {
             e.printStackTrace();
         }
 
-
     }
 }
-
