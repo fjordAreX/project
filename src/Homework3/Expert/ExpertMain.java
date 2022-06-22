@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class ExpertMain {
     public static void main(String[] args) {
+
         System.out.println("Задание 1");
 
         for (int i = 1; i <= 12; i++) {
@@ -24,9 +25,8 @@ public class ExpertMain {
         allTimeExpenses(0, map);
 
         for (Map.Entry<String, Float> entry : map.entrySet()) {
-            System.out.println("Расходы " + entry.getKey() + " за все время " + entry.getValue());
+            System.out.println("Расходы " + entry.getKey() + " за весь период: " + entry.getValue());
         }
-
     }
 
     public static void profitByMonth(int month) {
