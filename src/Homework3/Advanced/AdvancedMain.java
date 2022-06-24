@@ -47,8 +47,7 @@ public class AdvancedMain {
             e.printStackTrace();
         }
 
-        try {
-            Scanner scanner = new Scanner(file);
+        try(Scanner scanner = new Scanner(file)) {
             String text = scanner.nextLine();
             String[] arrayOfReports = text.split(";");
             long income = 0;
