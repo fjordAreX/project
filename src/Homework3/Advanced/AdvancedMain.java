@@ -40,7 +40,7 @@ public class AdvancedMain {
 
             Random random = new Random(1);
             for (int i = 0; i < 10; i++) {
-                outputStreamWriter.write(String.valueOf(new FinancialRecord(Math.abs(random.nextInt()), Math.abs(random.nextInt())))+"\n");
+                outputStreamWriter.write(new FinancialRecord(Math.abs(random.nextInt()), Math.abs(random.nextInt()))+"\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
