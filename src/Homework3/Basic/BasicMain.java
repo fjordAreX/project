@@ -31,16 +31,17 @@ public class BasicMain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String firstLine;
-        String secondLine;
+
+        StringBuilder builder = new StringBuilder();
+
         try (Scanner scanner = new Scanner(file)) {
-            firstLine = scanner.nextLine();
-            secondLine = scanner.nextLine();
+            while (scanner.hasNext()) {
+                builder.append(scanner.nextLine()).append(" ");
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println(firstLine + " " + secondLine);
+        System.out.println(builder);
 
         System.out.println("\n Задание 3");
         File report = new File("resource/report.txt");
