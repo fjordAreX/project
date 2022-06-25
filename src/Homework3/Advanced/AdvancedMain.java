@@ -26,8 +26,7 @@ public class AdvancedMain {
         for (Car car : cars) {
             if (car instanceof Lada) {
                 ((Lada) car).breakDown();
-            }
-            if (car instanceof Toyota) {
+            } else if (car instanceof Toyota) {
                 ((Toyota) car).turnOnMusic();
             }
         }
@@ -41,28 +40,30 @@ public class AdvancedMain {
 
             Random random = new Random(1);
             for (int i = 0; i < 10; i++) {
-                outputStreamWriter.write(String.valueOf(new FinancialRecord(Math.abs(random.nextInt()), Math.abs(random.nextInt()))));
+                outputStreamWriter.write(String.valueOf(new FinancialRecord(Math.abs(random.nextInt()), Math.abs(random.nextInt())))+"\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try(Scanner scanner = new Scanner(file)) {
-            String text = scanner.nextLine();
-            String[] arrayOfReports = text.split(";");
             long income = 0;
             long outcome = 0;
 
-            for (String report : arrayOfReports) {
-                Pattern pattern = Pattern.compile("\\p{L}+ = (\\d+), \\p{L}+ = (\\d+)");
-                Matcher matcher = pattern.matcher(report);
+            while (scanner.hasNext()) {
+                String text = scanner.nextLine();
+                String[] arrayOfReports = text.split(";");
 
-                if (matcher.find()) {
-                    income += Long.parseLong(matcher.group(1));
-                    outcome += Long.parseLong(matcher.group(2));
+                for (String report : arrayOfReports) {
+                    Pattern pattern = Pattern.compile("\\p{L}+ = (\\d+), \\p{L}+ = (\\d+)");
+                    Matcher matcher = pattern.matcher(report);
+
+                    if (matcher.find()) {
+                        income += Long.parseLong(matcher.group(1));
+                        outcome += Long.parseLong(matcher.group(2));
+                    }
                 }
             }
-
             System.out.println("Общие доходы - " + income + " Общие расходы - " + outcome);
 
         } catch (FileNotFoundException e) {
